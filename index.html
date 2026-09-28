@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#081b33">
+<title>Para ti, mi amor 💙</title>
+<style>
+:root{
+  --bg:#061321; --bg2:#0b2340; --card:rgba(255,255,255,.075);
+  --line:rgba(255,255,255,.14); --text:#f5f8ff; --muted:#b8c7dc;
+  --blue:#62b7ff; --blue2:#9bd4ff; --pink:#ff9fc4;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:radial-gradient(circle at 20% 10%,#12385f 0,transparent 32%),
+  radial-gradient(circle at 85% 20%,#23365d 0,transparent 30%),linear-gradient(150deg,var(--bg),#020811);
+  color:var(--text);font-family:Georgia,"Times New Roman",serif;line-height:1.75;overflow-x:hidden
+}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.18;
+background-image:radial-gradient(#fff 1px,transparent 1px);background-size:42px 42px}
+#particles{position:fixed;inset:0;pointer-events:none;z-index:0}
+.p{position:absolute;width:3px;height:3px;background:#fff;border-radius:50%;opacity:.6;animation:float 8s infinite ease-in-out}
+@keyframes float{0%,100%{transform:translateY(0);opacity:.2}50%{transform:translateY(-35px);opacity:.8}}
+main{position:relative;z-index:1;max-width:920px;margin:auto;padding:22px}
+section{margin:26px 0;padding:30px;border:1px solid var(--line);border-radius:28px;background:var(--card);
+backdrop-filter:blur(14px);box-shadow:0 20px 60px rgba(0,0,0,.22)}
+.hero{min-height:92vh;display:flex;align-items:center;justify-content:center;text-align:center;border:0;background:transparent;box-shadow:none}
+.small{letter-spacing:4px;text-transform:uppercase;color:var(--blue2);font-size:.78rem}
+h1{font-size:clamp(3rem,11vw,7rem);line-height:.95;margin:18px 0}
+h2{font-size:clamp(1.8rem,6vw,3rem);line-height:1.15}
+h3{color:var(--blue2)}
+p{font-size:1.06rem;color:#e7edf8}
+.muted{color:var(--muted)}
+.heart{font-size:6rem;display:inline-block;filter:drop-shadow(0 0 24px rgba(98,183,255,.45));animation:pulse 1.8s infinite}
+@keyframes pulse{50%{transform:scale(1.12)}}
+button{
+border:1px solid rgba(255,255,255,.22);background:linear-gradient(135deg,#267fc0,#164a78);
+color:#fff;padding:14px 22px;border-radius:999px;font-size:1rem;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.2)
+}
+button:hover{transform:translateY(-2px)}
+.center{text-align:center}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:30px 0}
+.quote{font-size:1.45rem;font-style:italic;text-align:center;color:#dceeff}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.card{padding:20px;border:1px solid var(--line);border-radius:20px;background:rgba(0,0,0,.12)}
+.number{color:var(--blue);font-weight:bold;margin-right:8px}
+.reasons{columns:2;column-gap:30px}
+.reason{break-inside:avoid;margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.06)}
+.envelopes{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.envelope{min-height:190px;display:flex;align-items:center;justify-content:center;text-align:center;padding:18px}
+.hidden{display:none}
+.reveal{animation:reveal .8s ease both}
+@keyframes reveal{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.timeline{border-left:2px solid rgba(98,183,255,.4);padding-left:22px}
+.timeline article{position:relative;margin:0 0 28px}
+.timeline article:before{content:"";position:absolute;left:-30px;top:7px;width:13px;height:13px;background:var(--blue);border-radius:50%;box-shadow:0 0 18px var(--blue)}
+footer{text-align:center;padding:50px 10px 80px;color:var(--muted)}
+
+.typewriter{min-height:120px;font-size:1.18rem;color:#eaf4ff;text-align:center}
+.story-step{display:none}.story-step.active{display:block;animation:reveal .8s ease both}
+.story-nav{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.letter-line{opacity:0;transform:translateY(8px);animation:lineIn .7s ease forwards}
+@keyframes lineIn{to{opacity:1;transform:none}}
+.secret{display:none;text-align:center}.secret.show{display:block;animation:reveal 1s ease both}
+.infinity{font-size:3rem;color:var(--blue2);margin:8px}
+@media(max-width:650px){
+section{padding:23px 18px;border-radius:22px}.hero{min-height:84vh;padding:10px}
+.reasons{columns:1}.envelopes{grid-template-columns:1fr}
+h1{font-size:3.6rem}p{font-size:1rem}
+}
+</style>
+</head>
+<body>
+<div id="particles"></div>
+
+<main>
+<section class="hero">
+<div>
+<div class="small">Esto no es una página cualquiera</div>
+<div class="heart">💙</div>
+<h1>Para ti,<br>mi amor.</h1>
+<p class="muted">Hice esto con calma, pensando en ti y en todo lo que hemos ido construyendo.</p>
+<button id="giftButton" onclick="startGift()">Abrir mi regalo 💌</button>
+<p id="musicNote" class="muted" style="font-size:.82rem;margin-top:14px">💙 Para este momento...</p><button id="playAgain" class="hidden" onclick="playSongAgain()" style="margin-top:8px">🎵 Tocar la canción</button>
+<audio id="song" preload="metadata" playsinline controls style="width:100%;max-width:420px;margin-top:10px;opacity:.9"><source src="musica/cancion.mp3" type="audio/mpeg"><source src="musica/cancion.m4a" type="audio/mp4"></audio>
+</div>
+</section>
+
+<section id="inicio" class="reveal">
+<div class="small">Antes de seguir</div>
+<h2>Quería hacerte algo que no terminara en un simple “te amo”.</h2>
+<p>Porque decirte que te amo es fácil. Lo difícil es intentar explicar todo lo que significa para mí tenerte en mi vida. Hay cosas que no caben en una conversación, ni en un mensaje, ni siquiera en una carta.</p>
+<p>Por eso hice esto. Para dejar aquí un pedacito de todo lo que siento, de lo que recuerdo, de lo que agradezco y de todo lo que todavía quiero vivir contigo.</p>
+<p>Y sí… probablemente me tardé más de lo necesario haciendo algunas cosas de esta página. Pero si era para ti, ¿qué prisa tenía?</p>
+</section>
+
+<section>
+<div class="small">Lo que significas para mí</div>
+<h2>No llegaste simplemente a mi vida.</h2>
+<p>Llegaste y poco a poco empezaste a ocupar espacios que yo ni siquiera sabía que estaban esperando a alguien. Te convertiste en esa persona a la que quiero contarle cosas, en la que pienso cuando pasa algo bonito, en la que quiero tener cerca cuando un día no sale como esperaba.</p>
+<p>Me gusta saber que puedo ser yo contigo. Me gusta molestarte, hacerte reír, escuchar tus cosas, aprender cómo eres y descubrir cada día alguna parte de ti que antes no conocía.</p>
+<p>Y aunque seguramente no soy perfecto demostrando todo lo que siento, quiero que sepas algo: <b>lo que siento por ti no depende de que todo sea perfecto.</b> Te quiero en los días bonitos y también en esos días en los que simplemente necesitamos estar ahí.</p>
+</section>
+
+<section>
+<div class="small">Una parte que me hace sonreír</div>
+<h2>Que ya conociste a mis papás. 🥹</h2>
+<p>Puede parecer un detalle pequeño, pero para mí no lo es.</p>
+<p>Que hayas conocido a mis papás significó que poco a poco te fui dejando entrar en una parte todavía más importante de mi vida. Y hay algo que me da una felicidad enorme cuando lo pienso: <b>eres la primera persona que recuerdo que realmente les cae bien.</b></p>
+<p>No sabes lo bonito que se siente poder pensar en ti y saber que no solamente eres importante para mí, sino que también pudiste conectar con las personas que forman parte de mi familia.</p>
+<p>Me hace ilusión imaginar todos los momentos que todavía pueden venir: más conversaciones, más visitas, más risas y más recuerdos donde tú ya no seas solamente “mi novia”, sino alguien que también forma parte de nuestra historia familiar.</p>
+<p class="quote">“Que hayas entrado a mi corazón ya era muchísimo. Que también hayas encontrado un lugar con mi familia… eso significa todavía más.”</p>
+</section>
+
+<section>
+<div class="small">Mis primeros y mis próximos contigo</div>
+<h2>Quiero que seas esa persona con la que descubra la vida. 💙</h2>
+<p>Hay algo que también quería dejar escrito: quiero que seas la primera y la única mujer con la que yo quiera vivir tantas cosas importantes de mi vida.</p>
+<p>No hablo solamente de grandes momentos. Hablo de esas primeras veces bonitas que se quedan para siempre: conocer lugares nuevos, hacer planes que nunca hemos hecho, aprender cosas juntos, viajar, cumplir metas, tomar decisiones importantes, reírnos de cosas que solo nosotros entendamos y algún día mirar atrás y pensar en todo lo que construimos.</p>
+<p>Quiero descubrir contigo cosas nuevas sin sentir que tengo que vivirlas con alguien más. Quiero que muchas de mis historias favoritas tengan tu nombre en ellas.</p>
+<p>Quiero que seas esa persona a la que pueda decirle: <i>“¿Te acuerdas cuando hicimos esto por primera vez?”</i> y que los dos tengamos una historia detrás de esa frase.</p>
+<p>Porque para mí no se trata de coleccionar experiencias. Se trata de encontrar a la persona con quien quiero compartirlas.</p>
+<p class="quote">“No quiero vivirlo todo con cualquiera. Quiero vivir muchísimo contigo.”</p>
+</section>
+
+
+<section>
+<div class="small">Nuestra historia todavía se está escribiendo</div>
+<h2>Desde que llegaste…</h2>
+<div id="story">
+  <article class="story-step active">
+    <h3>01 · Al principio</h3>
+    <p>No sabía todo lo que iba a significar conocerte. Solo sabía que había algo en ti que hacía que quisiera seguir descubriéndote.</p>
+  </article>
+  <article class="story-step">
+    <h3>02 · Poco a poco</h3>
+    <p>Empezaste a formar parte de mis conversaciones, de mis pensamientos y de esos pequeños momentos del día que uno termina queriendo compartir con alguien.</p>
+  </article>
+  <article class="story-step">
+    <h3>03 · Cuando ya eras tú</h3>
+    <p>En algún punto dejaste de ser solamente alguien especial y te convertiste en esa persona que yo quería tener cerca, cuidar y hacer feliz.</p>
+  </article>
+  <article class="story-step">
+    <h3>04 · Cuando conociste a mis papás</h3>
+    <p>Ese momento tuvo un significado diferente para mí. Me hizo ilusión verte conocer una parte tan importante de mi vida y descubrir que, además, eres la primera persona que recuerdo que les cae así de bien.</p>
+  </article>
+  <article class="story-step">
+    <h3>05 · Ahora</h3>
+    <p>Ahora estamos escribiendo nuestra propia historia. No sé exactamente qué tendrá cada página, pero sí sé con quién quiero seguir escribiéndola.</p>
+  </article>
+  <article class="story-step">
+    <h3>06 · Lo que falta</h3>
+    <p>Viajes, primeras veces, metas, días normales, celebraciones, errores, aprendizajes, risas y muchísimos recuerdos que todavía ni siquiera existen.</p>
+  </article>
+</div>
+<div class="story-nav">
+  <button onclick="storyMove(-1)">← Anterior</button>
+  <button onclick="storyMove(1)">Siguiente →</button>
+</div>
+<p id="storyCount" class="muted center">1 / 6</p>
+</section>
+
+<section>
+<div class="small">Una carta que quería escribirte despacio</div>
+<h2>Hay algo que llevo tiempo queriendo decirte…</h2>
+<div id="typedLetter" class="typewriter">Pulsa el botón cuando estés lista. 💙</div>
+<div class="center">
+<button onclick="writeLetter()">Leer mi carta</button>
+</div>
+</section>
+
+<section>
+<div class="small">Si pudiera explicarte mi cariño</div>
+<div class="grid">
+<div class="card"><h3>Te elijo</h3><p>No porque todo sea perfecto, sino porque entre tantas personas, eres tú con quien quiero seguir construyendo.</p></div>
+<div class="card"><h3>Te admiro</h3><p>Hay cosas de ti que quizá tú ves normales, pero que yo veo y pienso: “qué bonito que ella sea así”.</p></div>
+<div class="card"><h3>Te agradezco</h3><p>Por cada momento, cada conversación, cada risa y hasta por esas pequeñas cosas que probablemente ni recuerdas.</p></div>
+<div class="card"><h3>Te cuido</h3><p>Quiero que conmigo puedas sentir cariño, confianza y ese lugar donde puedes bajar la guardia.</p></div>
+</div>
+</section>
+
+<section>
+<div class="small">Una pequeña colección</div>
+<h2>100 razones por las que te quiero</h2>
+<div class="reasons">
+<div class="reason"><span class="number">01.</span>Porque contigo puedo ser yo.</div>
+<div class="reason"><span class="number">02.</span>Porque me haces sonreír incluso sin intentarlo.</div>
+<div class="reason"><span class="number">03.</span>Porque me gusta cómo suena tu voz.</div>
+<div class="reason"><span class="number">04.</span>Porque me encanta cuando te emocionas contando algo.</div>
+<div class="reason"><span class="number">05.</span>Porque me gusta escucharte.</div>
+<div class="reason"><span class="number">06.</span>Porque me haces querer ser mejor.</div>
+<div class="reason"><span class="number">07.</span>Porque contigo los momentos sencillos se sienten especiales.</div>
+<div class="reason"><span class="number">08.</span>Porque me gusta saber de tu día.</div>
+<div class="reason"><span class="number">09.</span>Porque me importa cómo te sientes.</div>
+<div class="reason"><span class="number">10.</span>Porque tu risa se me queda en la cabeza.</div>
+<div class="reason"><span class="number">11.</span>Porque me encanta tu forma de ser.</div>
+<div class="reason"><span class="number">12.</span>Porque tienes detalles que me derriten.</div>
+<div class="reason"><span class="number">13.</span>Porque me gusta cuidarte.</div>
+<div class="reason"><span class="number">14.</span>Porque me gusta que seas parte de mis días.</div>
+<div class="reason"><span class="number">15.</span>Porque me gusta cuando me buscas.</div>
+<div class="reason"><span class="number">16.</span>Porque contigo puedo hablar de cualquier cosa.</div>
+<div class="reason"><span class="number">17.</span>Porque me haces sentir querido.</div>
+<div class="reason"><span class="number">18.</span>Porque me importa verte feliz.</div>
+<div class="reason"><span class="number">19.</span>Porque tus abrazos tienen algo diferente.</div>
+<div class="reason"><span class="number">20.</span>Porque me gusta tener recuerdos contigo.</div>
+<div class="reason"><span class="number">21.</span>Porque me gusta imaginar planes contigo.</div>
+<div class="reason"><span class="number">22.</span>Porque haces que espere con ilusión los próximos días.</div>
+<div class="reason"><span class="number">23.</span>Porque eres alguien que quiero conservar en mi vida.</div>
+<div class="reason"><span class="number">24.</span>Porque me gusta tu manera de querer.</div>
+<div class="reason"><span class="number">25.</span>Porque me gusta aprenderte poco a poco.</div>
+<div class="reason"><span class="number">26.</span>Porque cada conversación contigo deja algo.</div>
+<div class="reason"><span class="number">27.</span>Porque me gusta cuando nos reímos de cualquier tontería.</div>
+<div class="reason"><span class="number">28.</span>Porque haces que un día normal tenga algo bonito.</div>
+<div class="reason"><span class="number">29.</span>Porque me gusta tu forma de mirarme.</div>
+<div class="reason"><span class="number">30.</span>Porque me haces sentir que tengo a alguien de mi lado.</div>
+<div class="reason"><span class="number">31.</span>Porque no necesito una ocasión especial para quererte.</div>
+<div class="reason"><span class="number">32.</span>Porque me acuerdo de ti en canciones.</div>
+<div class="reason"><span class="number">33.</span>Porque me gusta hacer cosas pensando en ti.</div>
+<div class="reason"><span class="number">34.</span>Porque eres parte de mis pensamientos sin darte cuenta.</div>
+<div class="reason"><span class="number">35.</span>Porque me importa lo que sueñas.</div>
+<div class="reason"><span class="number">36.</span>Porque quiero acompañarte en tus metas.</div>
+<div class="reason"><span class="number">37.</span>Porque me gusta celebrar tus logros.</div>
+<div class="reason"><span class="number">38.</span>Porque me nace cuidarte.</div>
+<div class="reason"><span class="number">39.</span>Porque me gusta hacerte detalles.</div>
+<div class="reason"><span class="number">40.</span>Porque tu presencia me da tranquilidad.</div>
+<div class="reason"><span class="number">41.</span>Porque me gusta tu forma de hablar.</div>
+<div class="reason"><span class="number">42.</span>Porque tienes una manera muy tuya de hacer las cosas.</div>
+<div class="reason"><span class="number">43.</span>Porque me gusta conocerte más.</div>
+<div class="reason"><span class="number">44.</span>Porque no me canso de descubrir cosas de ti.</div>
+<div class="reason"><span class="number">45.</span>Porque me gusta cuando confías en mí.</div>
+<div class="reason"><span class="number">46.</span>Porque quiero ser alguien en quien puedas confiar.</div>
+<div class="reason"><span class="number">47.</span>Porque me gusta sentir que somos un equipo.</div>
+<div class="reason"><span class="number">48.</span>Porque me haces valorar más los pequeños detalles.</div>
+<div class="reason"><span class="number">49.</span>Porque me gusta verte feliz por algo que te gusta.</div>
+<div class="reason"><span class="number">50.</span>Porque simplemente eres tú.</div>
+<div class="reason"><span class="number">51.</span>Porque me gusta que conozcas partes de mí que no todos conocen.</div>
+<div class="reason"><span class="number">52.</span>Porque quiero seguir creando historias contigo.</div>
+<div class="reason"><span class="number">53.</span>Porque me gusta cuando me haces sentir especial.</div>
+<div class="reason"><span class="number">54.</span>Porque me gusta hacerte sentir especial a ti.</div>
+<div class="reason"><span class="number">55.</span>Porque me importan tus pequeños gustos.</div>
+<div class="reason"><span class="number">56.</span>Porque me acuerdo de detalles que me has contado.</div>
+<div class="reason"><span class="number">57.</span>Porque me gusta sorprenderte.</div>
+<div class="reason"><span class="number">58.</span>Porque me gusta cuando algo te emociona.</div>
+<div class="reason"><span class="number">59.</span>Porque me gusta estar cerca de ti.</div>
+<div class="reason"><span class="number">60.</span>Porque incluso extrañarte demuestra lo importante que eres.</div>
+<div class="reason"><span class="number">61.</span>Porque me gusta compartir mi tiempo contigo.</div>
+<div class="reason"><span class="number">62.</span>Porque me gusta escuchar tus historias.</div>
+<div class="reason"><span class="number">63.</span>Porque me gusta cuando hacemos planes espontáneos.</div>
+<div class="reason"><span class="number">64.</span>Porque me haces sentir acompañado.</div>
+<div class="reason"><span class="number">65.</span>Porque me gusta tu forma de demostrar cariño.</div>
+<div class="reason"><span class="number">66.</span>Porque me gusta cómo eres con las personas que quieres.</div>
+<div class="reason"><span class="number">67.</span>Porque me gusta que ya seas parte de momentos importantes de mi vida.</div>
+<div class="reason"><span class="number">68.</span>Porque conociste a mis papás y eso me hizo mucha ilusión.</div>
+<div class="reason"><span class="number">69.</span>Porque hasta mi familia pudo ver lo especial que eres.</div>
+<div class="reason"><span class="number">70.</span>Porque me gusta imaginar más reuniones donde estés tú.</div>
+<div class="reason"><span class="number">71.</span>Porque contigo quiero sumar, no restar.</div>
+<div class="reason"><span class="number">72.</span>Porque quiero aprender a quererte cada vez mejor.</div>
+<div class="reason"><span class="number">73.</span>Porque me gusta pedirte opinión.</div>
+<div class="reason"><span class="number">74.</span>Porque me gusta contarte mis cosas.</div>
+<div class="reason"><span class="number">75.</span>Porque quiero escuchar las tuyas también.</div>
+<div class="reason"><span class="number">76.</span>Porque me haces sentir ilusión.</div>
+<div class="reason"><span class="number">77.</span>Porque me gusta pensar en nuestro futuro sin tener que apresurarlo.</div>
+<div class="reason"><span class="number">78.</span>Porque quiero disfrutar el presente contigo.</div>
+<div class="reason"><span class="number">79.</span>Porque me gusta tu manera de hacerme reír.</div>
+<div class="reason"><span class="number">80.</span>Porque me gusta cuando una tontería nuestra termina siendo un recuerdo.</div>
+<div class="reason"><span class="number">81.</span>Porque contigo puedo tener momentos tranquilos.</div>
+<div class="reason"><span class="number">82.</span>Porque también quiero estar cuando las cosas sean difíciles.</div>
+<div class="reason"><span class="number">83.</span>Porque quiero que sepas que puedes contar conmigo.</div>
+<div class="reason"><span class="number">84.</span>Porque me gusta la confianza que estamos construyendo.</div>
+<div class="reason"><span class="number">85.</span>Porque me gusta que podamos aprender de nuestros errores.</div>
+<div class="reason"><span class="number">86.</span>Porque no quiero que nuestro cariño se vuelva costumbre.</div>
+<div class="reason"><span class="number">87.</span>Porque quiero seguir teniendo detalles contigo.</div>
+<div class="reason"><span class="number">88.</span>Porque me gusta hacerte sonreír.</div>
+<div class="reason"><span class="number">89.</span>Porque me importa que te sientas amada.</div>
+<div class="reason"><span class="number">90.</span>Porque me gusta saber que puedo darte un poquito de felicidad.</div>
+<div class="reason"><span class="number">91.</span>Porque eres una de esas personas que uno agradece haber conocido.</div>
+<div class="reason"><span class="number">92.</span>Porque no quiero que olvides lo importante que eres para mí.</div>
+<div class="reason"><span class="number">93.</span>Porque me gusta decir “mi novia” cuando hablo de ti.</div>
+<div class="reason"><span class="number">94.</span>Porque me gusta tener una historia que sea nuestra.</div>
+<div class="reason"><span class="number">95.</span>Porque quiero que tengamos muchas más primeras veces juntos.</div>
+<div class="reason"><span class="number">96.</span>Porque quiero llenar más álbumes mentales contigo.</div>
+<div class="reason"><span class="number">97.</span>Porque quiero seguir encontrando razones nuevas.</div>
+<div class="reason"><span class="number">98.</span>Porque aunque escribiera mil razones, todavía me faltarían.</div>
+<div class="reason"><span class="number">99.</span>Porque después de todo esto, todavía elegiría decirte “te quiero”.</div>
+<div class="reason"><span class="number">100.</span>Porque eres tú, y para mí eso ya dice muchísimo.</div>
+</div>
+</section>
+
+<section>
+<div class="small">Cosas que todavía quiero vivir contigo</div>
+<div class="timeline">
+<article><h3>Más días normales</h3><p>No todo tiene que ser una fecha especial. Quiero más días de esos que empiezan sin saber que terminarán siendo un recuerdo bonito.</p></article>
+<article><h3>Más fotografías mentales</h3><p>Quiero seguir guardando momentos tuyos: una sonrisa, una mirada, una conversación, una tontería que nos hizo reír.</p></article>
+<article><h3>Más familia</h3><p>Ahora que ya conociste a mis papás, quiero que esa parte de mi vida siga teniendo momentos contigo. Me hace feliz pensar en eso.</p></article>
+<article><h3>Más nosotros</h3><p>Quiero que sigamos aprendiendo a querernos, a escucharnos y a construir algo que se sienta verdaderamente nuestro.</p></article>
+</div>
+</section>
+
+<section class="center">
+<div class="small">Tres cosas que quiero que abras</div>
+<h2>Ábrelos uno por uno 💌</h2>
+<p class="muted">No hay contraseña. Solo tienes que hacerlo con calma.</p>
+<div class="envelopes">
+<button class="envelope" onclick="openLetter(1)">💌<br>Una cosa que nunca quiero que olvides</button>
+<button class="envelope" onclick="openLetter(2)">💌<br>Lo que siento cuando pienso en ti</button>
+<button class="envelope" onclick="openLetter(3)">💌<br>Lo que deseo para nosotros</button>
+</div>
+<div id="letter" class="card hidden" style="margin-top:20px;text-align:left"></div>
+</section>
+
+<section>
+<div class="small">Y ahora sí</div>
+<h2>La parte que más quería dejarte.</h2>
+<p>No hice esto para demostrarte cuánto tiempo puedo pasar haciendo una página. Lo hice porque tú vales esos detalles para mí.</p>
+<p>Quería que algún día pudieras volver aquí y recordar que hubo alguien que se sentó a pensar en ti, en tus detalles, en lo que han vivido y en todo lo que todavía espera vivir contigo.</p>
+<p>También quería que quedara escrito algo que quizá no siempre digo de la manera correcta: <b>me importas muchísimo.</b></p>
+<p>Me importa tu felicidad. Me importa cómo estás. Me importan tus sueños, tus preocupaciones, tus días buenos y tus días malos. Me importa que cuando estés conmigo puedas sentir que tienes a alguien que de verdad quiere estar ahí.</p>
+<p>Y sí, me emociona saber que conociste a mis papás y que les caíste bien, porque para mí eso fue como ver que dos partes importantes de mi vida podían encontrarse y llevarse bien. No sé si tú lo viste como algo tan grande, pero yo sí.</p>
+<p>Quiero seguir haciendo recuerdos contigo. Quiero seguir aprendiendo de ti. Quiero seguir teniendo motivos para escribirte cosas cursis, para hacerte detalles y para pensar “esto le gustaría”.</p>
+<p>Y si algún día vuelves a preguntarme por qué te quiero, probablemente no te responda con una sola razón. Porque después de todo lo que hemos vivido, ya no eres una sola razón. Eres muchas.</p>
+<p class="quote">“Gracias por ser tú. Gracias por dejarme quererte. Y gracias por estar en mi vida.”</p>
+<div class="divider"></div>
+<h2>Te quiero muchísimo. 💙</h2>
+<p class="muted">— Vic</p>
+</section>
+
+
+<section class="center">
+<div class="small">Llegaste hasta aquí</div>
+<h2>100 razones después…</h2>
+<p>Quizá pensabas que ya habías terminado.</p>
+<button onclick="revealSecret()">Abrir una última cosa 💙</button>
+<div id="secret" class="secret">
+  <div class="divider"></div>
+  <h2>Pero todavía me faltaba decirte algo.</h2>
+  <p>Si algún día vuelves a esta página, quiero que recuerdes que no la hice solamente para decirte que te quiero.</p>
+  <p>La hice porque quiero que tengas un lugar donde puedas volver y encontrar un pedacito de lo que siento por ti.</p>
+  <p>Quiero vivir contigo cosas que todavía no conocemos. Quiero que seas esa persona con la que pueda decir “esto nunca lo habíamos hecho” y después convertirlo en un recuerdo nuestro.</p>
+  <p>Y sobre todo quiero seguir conociéndote, queriéndote y construyendo contigo, mientras la vida nos siga regalando capítulos.</p>
+  <div class="infinity">∞</div>
+  <p><b>100 razones escritas.<br>Infinitas razones que todavía me faltan.</b></p>
+  <h2>Esto no termina aquí. 💙</h2>
+  <p class="muted">Continuará…</p>
+</div>
+</section>
+
+<footer>
+<p>Hecho con tiempo, cariño y demasiados pensamientos sobre ti. 💙</p>
+<p style="font-size:.8rem">Si llegaste hasta aquí, ya sabes que todo esto era para ti.</p>
+</footer>
+</main>
+
+<script>
+const messages={
+1:`Hay algo que quiero que nunca olvides: no tienes que hacer algo extraordinario para ser importante para mí. No tienes que estar perfecta, ni tener el mejor día, ni saber siempre qué decir. Me gustas tú, con tus días buenos y tus días raros. Y quiero que cuando alguna vez dudes de lo mucho que significas para mí, recuerdes que alguien se tomó todo este tiempo solamente para dejarte escrito lo que muchas veces no sabe decir en persona.`,
+2:`Cuando pienso en ti me pasa algo muy bonito: empiezo recordando una cosa y termino pensando en diez. Una conversación me lleva a una risa, una risa me lleva a un momento y ese momento me hace pensar en todo lo que todavía quiero vivir contigo. Supongo que eso es parte de quererte: que apareces en mis pensamientos sin que tenga que buscarte.`,
+3:`No sé exactamente qué nos espera en cada etapa de la vida, y tampoco quiero apresurar nada. Solo sé que quiero seguir caminando contigo mientras los dos queramos hacerlo. Quiero más recuerdos, más risas, más planes improvisados, más fotos, más conversaciones y más momentos donde podamos mirar atrás y decir: “mira todo lo que hemos vivido”.`
+};
+function openLetter(n){
+ const box=document.getElementById('letter');
+ box.innerHTML=`<h3>💙 Para ti</h3><p>${messages[n]}</p>`;
+ box.classList.remove('hidden'); box.classList.remove('reveal'); void box.offsetWidth; box.classList.add('reveal');
+}
+
+let storyIndex=0;
+function storyMove(direction){
+ const steps=[...document.querySelectorAll('.story-step')];
+ storyIndex=(storyIndex+direction+steps.length)%steps.length;
+ steps.forEach((s,i)=>s.classList.toggle('active',i===storyIndex));
+ document.getElementById('storyCount').textContent=(storyIndex+1)+' / '+steps.length;
+}
+const letterText=[
+"Hay cosas que me cuesta decirte en persona porque cuando se trata de ti, siento que cualquier frase se queda corta.",
+"Quería que aquí quedara algo que pudieras leer cuando quisieras:",
+"me importas muchísimo.",
+"Quiero que seas la primera y la única mujer con la que quiera descubrir tantas cosas de la vida.",
+"No porque quiera correr ni porque crea que tenemos que vivirlo todo de una vez, sino porque cuando pienso en mis próximos recuerdos, muchas veces apareces tú.",
+"Quiero conocer lugares contigo, aprender cosas contigo, cumplir metas contigo, reírme de tonterías contigo y algún día mirar atrás y reconocer cuánto hemos vivido.",
+"Y también me hace feliz saber que ya conociste a mis papás, porque para mí fue como juntar dos partes muy importantes de mi vida.",
+"Gracias por ser parte de mi presente. Y ojalá podamos seguir convirtiendo el futuro en una colección enorme de recuerdos nuestros. 💙"
+];
+function writeLetter(){
+ const box=document.getElementById('typedLetter');
+ box.innerHTML='';
+ letterText.forEach((line,i)=>{
+   const p=document.createElement('p');p.className='letter-line';p.textContent=line;
+   p.style.animationDelay=(i*0.28)+'s';box.appendChild(p);
+ });
+}
+function revealSecret(){
+ document.getElementById('secret').classList.add('show');
+ document.getElementById('secret').scrollIntoView({behavior:'smooth',block:'center'});
+}
+function startGift(){
+ const audio=document.getElementById('song');
+ document.getElementById('musicNote').textContent='💙 Esta canción es parte de este momento.';
+ // Reproducir directamente dentro del toque del usuario. En iPhone/Safari esto evita perder el permiso de reproducción.
+ const playPromise=audio.play();
+ if(playPromise!==undefined){
+   playPromise.then(()=>{
+     document.getElementById('playAgain').classList.add('hidden');
+   }).catch(()=>{
+     document.getElementById('playAgain').classList.remove('hidden');
+     document.getElementById('musicNote').textContent='💙 Toca “Tocar la canción” para iniciar la música.';
+   });
+ }
+ document.getElementById('inicio').scrollIntoView({behavior:'smooth'});
+}
+function playSongAgain(){
+ const audio=document.getElementById('song');
+ audio.play().then(()=>{
+   document.getElementById('playAgain').classList.add('hidden');
+   document.getElementById('musicNote').textContent='💙 Esta canción es parte de este momento.';
+ }).catch(()=>{
+   document.getElementById('musicNote').textContent='💙 No se pudo reproducir la canción. Usa el reproductor de abajo.';
+   document.getElementById('song').setAttribute('controls','controls');
+ });
+}
+for(let i=0;i<55;i++){
+ const s=document.createElement('span');s.className='p';
+ s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';
+ s.style.animationDelay=(Math.random()*8)+'s';s.style.animationDuration=(5+Math.random()*7)+'s';
+ document.getElementById('particles').appendChild(s);
+}
+</script>
+</body>
+</html>
